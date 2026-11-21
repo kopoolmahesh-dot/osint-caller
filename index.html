@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>OSINT CALLER | Public-source intelligence</title>
+<style>
+:root{color-scheme:dark;--bg:#070b10;--panel:#101923;--line:#203142;--green:#43f0a1;--muted:#91a2b4}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 50% -20%,#123026 0,transparent 42%),var(--bg);color:#e9f3fa;font:15px/1.5 Inter,system-ui,Arial}
+main{max-width:920px;margin:0 auto;padding:42px 20px}.top{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.brand{font-weight:900;letter-spacing:2px;color:var(--green);font-size:22px}.pill{border:1px solid #1e6848;color:var(--green);padding:5px 10px;border-radius:99px;font-size:11px}
+h1{font-size:clamp(28px,5vw,46px);line-height:1.1;margin:42px 0 12px}p{color:var(--muted)}
+.panel{background:linear-gradient(145deg,#111d29,#0b121a);border:1px solid var(--line);border-radius:18px;padding:24px;margin-top:28px;box-shadow:0 18px 70px #0006}
+label{display:block;font-size:12px;color:var(--green);font-weight:700;letter-spacing:1px;margin-bottom:9px}
+.entry{display:flex;gap:10px;flex-wrap:wrap}input{flex:1;min-width:220px;background:#080e15;border:1px solid #2a4052;border-radius:10px;padding:15px;color:white;font-size:16px;outline:none}
+button{background:var(--green);color:#06110b;border:0;border-radius:10px;padding:14px 20px;font-weight:900;cursor:pointer}button:disabled{opacity:.5;cursor:wait}
+.note{font-size:12px}.results{display:none;margin-top:20px}.item{padding:13px;border:1px solid var(--line);border-radius:10px;margin-top:9px;background:#0a121b}.item a{color:var(--green);overflow-wrap:anywhere}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin-top:18px}.tile{border:1px solid var(--line);background:#0c141d;border-radius:12px;padding:15px}.tile b{display:block;color:var(--green);margin-bottom:4px}
+footer{margin:34px 0;color:#687b8e;font-size:12px}
+</style></head>
+<body><main>
+<div class="top"><div class="brand">⌁ OSINT CALLER</div><div class="pill">PUBLIC SOURCES ONLY</div></div>
+<h1>Caller intelligence.<br><span style="color:var(--green)">Evidence first.</span></h1>
+<p>Check number format and explore public web references. This tool does not reveal private subscriber identities or access private databases.</p>
+<section class="panel">
+<label for="phone">PHONE NUMBER</label>
+<div class="entry"><input id="phone" type="tel" placeholder="+91 98765 43210" autocomplete="tel"><button id="search">RUN CHECK</button></div>
+<p class="note">Enter a number with country code where possible. Searches open public web sources in a new tab.</p>
+<div id="results" class="results" aria-live="polite"></div>
+</section>
+<div class="grid"><div class="tile"><b>01 / FORMAT</b>Basic number cleanup and validation hints.</div><div class="tile"><b>02 / PUBLIC SEARCH</b>Search-engine references and user-accessible public reports.</div><div class="tile"><b>03 / EVIDENCE</b>Review each source yourself; no identity claims are inferred.</div></div>
+<footer>OSINT CALLER · Use responsibly. Public information may be incomplete, outdated, or incorrectly attributed.</footer>
+</main>
+<script>
+const $=id=>document.getElementById(id);
+$('search').addEventListener('click',async()=>{
+ const raw=$('phone').value.trim(); const btn=$('search'), out=$('results');
+ if(!raw){out.style.display='block';out.textContent='Enter a phone number first.';return}
+ btn.disabled=true;btn.textContent='CHECKING…';out.style.display='block';out.innerHTML='';
+ try{
+  const r=await fetch('/api/check',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({phone:raw})});
+  const data=await r.json(); if(!r.ok) throw new Error(data.error||'Request failed');
+  const heading=document.createElement('div');heading.className='item';heading.textContent=`Normalized input: ${data.normalized} · ${data.digits} digits`;out.appendChild(heading);
+  const info=document.createElement('p');info.className='note';info.textContent=data.note;out.appendChild(info);
+  data.sources.forEach(s=>{const el=document.createElement('div');el.className='item';const a=document.createElement('a');a.href=s.url;a.target='_blank';a.rel='noopener noreferrer';a.textContent=s.label;el.appendChild(a);out.appendChild(el)});
+ }catch(e){out.textContent=e.message}
+ finally{btn.disabled=false;btn.textContent='RUN CHECK'}
+});
+</script></body></html>
