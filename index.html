@@ -2,47 +2,63 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Public-source phone number research and validation links.">
 <title>OSINT CALLER | Public-source intelligence</title>
 <style>
 :root{color-scheme:dark;--bg:#070b10;--panel:#101923;--line:#203142;--green:#43f0a1;--muted:#91a2b4}
 *{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 50% -20%,#123026 0,transparent 42%),var(--bg);color:#e9f3fa;font:15px/1.5 Inter,system-ui,Arial}
-main{max-width:920px;margin:0 auto;padding:42px 20px}.top{display:flex;justify-content:space-between;align-items:center;gap:12px}
+main{max-width:920px;margin:0 auto;padding:30px 18px}.top{display:flex;justify-content:space-between;align-items:center;gap:12px}
 .brand{font-weight:900;letter-spacing:2px;color:var(--green);font-size:22px}.pill{border:1px solid #1e6848;color:var(--green);padding:5px 10px;border-radius:99px;font-size:11px}
-h1{font-size:clamp(28px,5vw,46px);line-height:1.1;margin:42px 0 12px}p{color:var(--muted)}
-.panel{background:linear-gradient(145deg,#111d29,#0b121a);border:1px solid var(--line);border-radius:18px;padding:24px;margin-top:28px;box-shadow:0 18px 70px #0006}
+h1{font-size:clamp(28px,5vw,46px);line-height:1.1;margin:38px 0 12px}p{color:var(--muted)}
+.panel{background:linear-gradient(145deg,#111d29,#0b121a);border:1px solid var(--line);border-radius:18px;padding:22px;margin-top:24px;box-shadow:0 18px 70px #0006}
 label{display:block;font-size:12px;color:var(--green);font-weight:700;letter-spacing:1px;margin-bottom:9px}
 .entry{display:flex;gap:10px;flex-wrap:wrap}input{flex:1;min-width:220px;background:#080e15;border:1px solid #2a4052;border-radius:10px;padding:15px;color:white;font-size:16px;outline:none}
-button{background:var(--green);color:#06110b;border:0;border-radius:10px;padding:14px 20px;font-weight:900;cursor:pointer}button:disabled{opacity:.5;cursor:wait}
-.note{font-size:12px}.results{display:none;margin-top:20px}.item{padding:13px;border:1px solid var(--line);border-radius:10px;margin-top:9px;background:#0a121b}.item a{color:var(--green);overflow-wrap:anywhere}
+button{background:var(--green);color:#06110b;border:0;border-radius:10px;padding:14px 20px;font-weight:900;cursor:pointer}
+.note{font-size:12px}.results{display:none;margin-top:18px}.item{padding:13px;border:1px solid var(--line);border-radius:10px;margin-top:9px;background:#0a121b}.item a,.resource a{color:var(--green);overflow-wrap:anywhere}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin-top:18px}.tile{border:1px solid var(--line);background:#0c141d;border-radius:12px;padding:15px}.tile b{display:block;color:var(--green);margin-bottom:4px}
-footer{margin:34px 0;color:#687b8e;font-size:12px}
+.resources{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}.resource{border:1px solid var(--line);background:#0a121b;border-radius:11px;padding:13px}.resource small{display:block;color:var(--muted);margin-top:4px}
+footer{margin:30px 0;color:#687b8e;font-size:12px}
 </style></head>
 <body><main>
 <div class="top"><div class="brand">⌁ OSINT CALLER</div><div class="pill">PUBLIC SOURCES ONLY</div></div>
 <h1>Caller intelligence.<br><span style="color:var(--green)">Evidence first.</span></h1>
-<p>Check number format and explore public web references. This tool does not reveal private subscriber identities or access private databases.</p>
+<p>Validate number format and open public-source searches. This tool does not reveal private subscriber identities, access private databases, or confirm who owns a number.</p>
 <section class="panel">
 <label for="phone">PHONE NUMBER</label>
-<div class="entry"><input id="phone" type="tel" placeholder="+91 98765 43210" autocomplete="tel"><button id="search">RUN CHECK</button></div>
-<p class="note">Enter a number with country code where possible. Searches open public web sources in a new tab.</p>
+<div class="entry"><input id="phone" type="tel" placeholder="+91 98765 43210" autocomplete="tel" inputmode="tel"><button id="search" type="button">BUILD SEARCHES</button></div>
+<p class="note">Enter a number with country code where possible. Search links open external websites; review each result yourself.</p>
 <div id="results" class="results" aria-live="polite"></div>
 </section>
-<div class="grid"><div class="tile"><b>01 / FORMAT</b>Basic number cleanup and validation hints.</div><div class="tile"><b>02 / PUBLIC SEARCH</b>Search-engine references and user-accessible public reports.</div><div class="tile"><b>03 / EVIDENCE</b>Review each source yourself; no identity claims are inferred.</div></div>
-<footer>OSINT CALLER · Use responsibly. Public information may be incomplete, outdated, or incorrectly attributed.</footer>
+<div class="grid"><div class="tile"><b>01 / FORMAT</b>Basic digit-count and normalization checks only.</div><div class="tile"><b>02 / PUBLIC SEARCH</b>Links to search engines and public indexed mentions.</div><div class="tile"><b>03 / EVIDENCE</b>Open the original source and verify context, date and accuracy.</div></div>
+<section class="panel"><h2>Telephone OSINT resources</h2><p>External services from the Telephone-OSINT resource collection. Availability, features and terms are controlled by each provider.</p>
+<div class="resources">
+<div class="resource"><a href="https://cylect.io/" target="_blank" rel="noopener noreferrer">Cylect</a><small>Search across public websites and data collectors.</small></div>
+<div class="resource"><a href="https://github.com/piaolin/DetectDee" target="_blank" rel="noopener noreferrer">DetectDee</a><small>Open-source social-account discovery project; review its requirements and lawful-use terms.</small></div>
+<div class="resource"><a href="https://www.eyecon-app.com/" target="_blank" rel="noopener noreferrer">Eyecon</a><small>Caller-ID service.</small></div>
+<div class="resource"><a href="https://getcontact.com/en/" target="_blank" rel="noopener noreferrer">Getcontact</a><small>Caller identification service; review its privacy policy before use.</small></div>
+<div class="resource"><a href="https://www.phonevalidator.com/" target="_blank" rel="noopener noreferrer">PhoneValidator</a><small>Phone-number validation resource.</small></div>
+<div class="resource"><a href="https://scamsearch.io/" target="_blank" rel="noopener noreferrer">ScamSearch</a><small>Public scam-report search resource.</small></div>
+<div class="resource"><a href="https://seon.io/" target="_blank" rel="noopener noreferrer">SEON</a><small>Fraud-prevention service.</small></div>
+<div class="resource"><a href="https://www.truecaller.com/" target="_blank" rel="noopener noreferrer">Truecaller</a><small>Caller-ID and spam-report service.</small></div>
+</div></section>
+<footer>OSINT CALLER · Public search results may be incomplete, outdated, misleading or incorrectly attributed. Do not use this tool to harass, track or expose private individuals.</footer>
 </main>
 <script>
-const $=id=>document.getElementById(id);
-$('search').addEventListener('click',async()=>{
- const raw=$('phone').value.trim(); const btn=$('search'), out=$('results');
- if(!raw){out.style.display='block';out.textContent='Enter a phone number first.';return}
- btn.disabled=true;btn.textContent='CHECKING…';out.style.display='block';out.innerHTML='';
- try{
-  const r=await fetch('/api/check',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({phone:raw})});
-  const data=await r.json(); if(!r.ok) throw new Error(data.error||'Request failed');
-  const heading=document.createElement('div');heading.className='item';heading.textContent=`Normalized input: ${data.normalized} · ${data.digits} digits`;out.appendChild(heading);
-  const info=document.createElement('p');info.className='note';info.textContent=data.note;out.appendChild(info);
-  data.sources.forEach(s=>{const el=document.createElement('div');el.className='item';const a=document.createElement('a');a.href=s.url;a.target='_blank';a.rel='noopener noreferrer';a.textContent=s.label;el.appendChild(a);out.appendChild(el)});
- }catch(e){out.textContent=e.message}
- finally{btn.disabled=false;btn.textContent='RUN CHECK'}
+const phoneInput=document.getElementById('phone'),button=document.getElementById('search'),out=document.getElementById('results');
+function addLink(parent,label,url){const box=document.createElement('div');box.className='item';const a=document.createElement('a');a.href=url;a.target='_blank';a.rel='noopener noreferrer';a.textContent=label;box.appendChild(a);parent.appendChild(box)}
+button.addEventListener('click',()=>{
+ const raw=phoneInput.value.trim(),digits=raw.replace(/\D/g,''),out=document.getElementById('results');
+ out.style.display='block';out.replaceChildren();
+ if(digits.length<7||digits.length>15){out.textContent='Enter a number containing 7–15 digits. Include the country code where possible.';return}
+ const normalized=(raw.startsWith('+')?'+':'')+digits;
+ const head=document.createElement('div');head.className='item';head.textContent='Normalized input: '+normalized+' · '+digits.length+' digits';out.appendChild(head);
+ const note=document.createElement('p');note.className='note';note.textContent='This is a format check only. It does not verify country, carrier, subscriber identity or caller reputation.';out.appendChild(note);
+ const exact='"'+normalized+'"';
+ addLink(out,'Search exact number on Google','https://www.google.com/search?q='+encodeURIComponent(exact));
+ addLink(out,'Search exact number on Bing','https://www.bing.com/search?q='+encodeURIComponent(exact));
+ addLink(out,'Search public Reddit mentions','https://www.google.com/search?q='+encodeURIComponent('site:reddit.com '+exact));
+ addLink(out,'Search public business listings','https://www.google.com/search?q='+encodeURIComponent(exact+' business'));
+ addLink(out,'Search public scam reports','https://www.google.com/search?q='+encodeURIComponent(exact+' scam OR spam OR fraud'));
 });
+phoneInput.addEventListener('keydown',e=>{if(e.key==='Enter')button.click()});
 </script></body></html>
